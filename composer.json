@@ -1,0 +1,12 @@
+{
+    "name": "VojtaSvoboda/foursquare",
+    "authors": [
+        {
+            "name": "Vojta Svoboda",
+            "email": "vojtasvoboda.cz@gmail.com"
+        }
+    ],
+    "require": {
+        "thetwelvelabs/foursquare": "0.2.*"
+    }
+}
