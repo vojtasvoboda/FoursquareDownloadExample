@@ -4,8 +4,19 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1cca78b58a83d8825bb07f0c4063ccf1",
+    "hash": "bfcac3cb9ed2f8e6400c8293ad94f0d4",
     "packages": [
+        {
+            "name": "haxx-se/curl",
+            "version": "1.0.0",
+            "dist": {
+                "type": "file",
+                "url": "http://curl.haxx.se/ca/cacert.pem",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        },
         {
             "name": "thetwelvelabs/foursquare",
             "version": "v0.2.1",
@@ -57,6 +68,60 @@
                 "foursquare"
             ],
             "time": "2013-10-23 13:43:31"
+        },
+        {
+            "name": "tracy/tracy",
+            "version": "v2.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/tracy.git",
+                "reference": "f5a2647c9d0174d218d626eab3952ea3a523c6e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/f5a2647c9d0174d218d626eab3952ea3a523c6e7",
+                "reference": "f5a2647c9d0174d218d626eab3952ea3a523c6e7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
+            },
+            "require-dev": {
+                "nette/tester": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/Tracy"
+                ],
+                "files": [
+                    "src/shortcuts.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "http://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "http://nette.org/contributors"
+                }
+            ],
+            "description": "Tracy: useful PHP debugger",
+            "homepage": "http://tracy.nette.org",
+            "keywords": [
+                "debug",
+                "debugger",
+                "nette"
+            ],
+            "time": "2014-06-24 01:18:03"
         }
     ],
     "packages-dev": [],

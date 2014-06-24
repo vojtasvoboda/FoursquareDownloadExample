@@ -55,7 +55,7 @@ https://api.foursquare.com/v2/venues/explore?ll=50.071726,14.402497&section=food
 - offset - stránkování v rámci vrácených výsledků
 - a další
 
-Protože chceme data stahovat strojově, hodila by se nějaká knihovna, která by se nám postarala o komunikaci a získávání dat. Foursquare přímo zveřejňuje (seznam dostupných knihoven)[https://developer.foursquare.com/resources/libraries] Zkusíme použít tu první. Otevřeme terminál a hurá na to. Vytvoříme si složku dostupnou z našeho webového serveru, inicializuje Git, Composer a přidáme závislost na vybranou knihovnu podle poslední dostupné verze na Githubu:
+Protože chceme data stahovat strojově, hodila by se nějaká knihovna, která by se nám postarala o komunikaci a získávání dat. Foursquare přímo zveřejňuje [seznam dostupných knihoven](https://developer.foursquare.com/resources/libraries) Zkusíme použít tu první. Otevřeme terminál a hurá na to. Vytvoříme si složku dostupnou z našeho webového serveru, inicializuje Git, Composer a přidáme závislost na vybranou knihovnu podle poslední dostupné verze na Githubu:
 
 ```
 mkdir Foursquare
@@ -64,13 +64,17 @@ git init
 composer init
 composer require thetwelvelabs/foursquare:'0.2.*'
 touch index.php
-mkdir libs
-touch libs/Foursquare.php
 ```
 
-Dále si vytvoříme základní soubory Foursquare.php kde budeme psát funkčnost ohledně stahování dat a index.php kde to budeme vše volat a ovládat.
+Dále si vytvořím soubor index.php, kde budu psát logiku aplikace. Rovnou si také přidám doplněk tracy/tracy pro lepší ladění kódu:
 
-...
+```
+composer require tracy/tracy:'2.2.*'
+```
+
+Podle návodu na GitHubu si zkusíme zavolat koncový bod venues/explore (venues/search není ještě v knihovně implementován). Je potřeba trošku upravit soubor composer.json, aby se nám stáhnul také certifikát, který potřeba pro komunikaci přes _curl_.
+
+Získané místa dostaneme už přímo jako pole objektů stdClass, nemusíme tak parsovat JSON.
 
 ## Dobré vědět
 ID místa se může měnit, ale staré ID vždy přesměruje na nové.
