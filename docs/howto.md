@@ -77,7 +77,16 @@ Získané místa dostaneme už přímo jako pole objektů stdClass, nemusíme ta
 
 ## Ukládání dat
 
-... dibi/dibi
+Pro ukládání dat do databáze použijeme nějakou jednoduchou knihovnu, třeba dibi, kterou opět nainstalujeme přes composer:
+
+```
+composer require dibi/dibi:'2.2.*'
+```
+
+Vytvoříme si databázi a nastavíme přístupy v souboru index.php do pole $options. Protože data o místech nám z API přicházejí jako vícerozměrný objekt, ale databáze je pouze jednorozměrná (nemůže mít sloupce zanořené do jiného sloupce), musíme si data převést.
+Toto provedeme pomocí několika funkcí, které jsem umístil do souboru libs/functions.inc.php. Rovněž si specifikujeme pole $allowFields, kterým definujeme, které sloupce jsme v databázi vytvořili a lze tedy do nich ukládat.
+
+
 
 ## Poznámky pod čarou
 
