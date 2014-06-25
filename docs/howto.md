@@ -27,20 +27,19 @@ Protože nespravujeme žádné místo, pojďme zkusit stáhout seznam nějakých
 
 Pro hlednání míst tedy využijeme koncové body _venues/*_. Dostupné koncové body jsou:
 
-- venues/search - vhodné pro hledání nejbližších míst, kde specifikujeme zaměření, nebo název lokace
-- venues/explore - vhodné pro hledání populárních míst bez specifikace názvu
-- venues/<VENUE_ID> - přístup ke konkrétní lokaci dle VENUE_ID
-- venues/categories - kategorie míst
+- **venues/search** - vhodné pro hledání nejbližších míst, kde specifikujeme zaměření, nebo název lokace
+- **venues/explore** - vhodné pro hledání populárních míst bez specifikace názvu
+- **venues/<VENUE_ID>** - přístup ke konkrétní lokaci dle VENUE_ID
+- **venues/categories** - kategorie míst
 - a další které pro nás zatím nejsou zajímavé (venues/managed, venues/suggestcompletion, venues/timeseries, venues/trending)
 
 Například pro hledání nejbližší sushi restaurace máme k dispozici koncový bod _venues/search_, takže cílová URL je:
 
-https://api.foursquare.com/v2/venues/search
-  ?client_id=CLIENT_ID
-  &client_secret=CLIENT_SECRET
-  &v=20130815
-  &ll=40.7,-74
-  &query=sushi
+https://api.foursquare.com/v2/venues/search?client_id=CLIENT_ID
+&client_secret=CLIENT_SECRET
+&v=20130815
+&ll=40.7,-74
+&query=sushi
 
 Kde _client_id_ a _client_secret_ jsou vygenerované přístupové údaje pro naší aplikaci, parametr 'v' je datum kdy jsme naposled testovali aplikaci (podle tohoto data nám bude vrácena verze API), 'll' je střed vyhledávání a 'query' je vyhledávací dotaz. Volitelný parametr je locale určující jazyk vrácených výsledků. Ve výchozím nastavení je locale=en a další možnosti jsou (es, fr, de, it, ja, th, tr, ko, ru, pt, and id).
 
@@ -48,11 +47,11 @@ Zkusíme použít koncový bod venues/explore a vyhledat tak restaurace v okolí
 
 https://api.foursquare.com/v2/venues/explore?ll=50.071726,14.402497&section=food (plus navíc parametr oauth_token, kterým získáme doporučená místa přímo pro uživatele, kterému OAuth token patří). Tento dotaz lze přímo vyzkoušet v (testovacím rozhraní)[https://developer.foursquare.com/docs/explore#req=venues/explore%3Fll%3D50.071726,14.402497%26section%3Dfood]. Místo parametru ll můžeme použít parametr near, který nastavíme na hodnotu 'Smíchov, Prague' a výsledek bude stejný. Dále můžeme měnit tyto atributy:
 
-- radius - rozsah hledání v metrech, výchozí hodnota je 250 metrů
-- section - specifikace kategorie, možnosti jsou food, drinks, coffee, shops, arts, outdoors, sights, trending or specials, nextVenues or topPicks
-- query - dotaz kterým upřesníme dotaz, např sushi
-- limit - maximum vrácených výsledků
-- offset - stránkování v rámci vrácených výsledků
+- **radius** - rozsah hledání v metrech, výchozí hodnota je 250 metrů
+- **section** - specifikace kategorie, možnosti jsou food, drinks, coffee, shops, arts, outdoors, sights, trending or specials, nextVenues or topPicks
+- **query** - dotaz kterým upřesníme dotaz, např sushi
+- **limit** - maximum vrácených výsledků
+- **offset** - stránkování v rámci vrácených výsledků
 - a další
 
 Protože chceme data stahovat strojově, hodila by se nějaká knihovna, která by se nám postarala o komunikaci a získávání dat. Foursquare přímo zveřejňuje [seznam dostupných knihoven](https://developer.foursquare.com/resources/libraries) Zkusíme použít tu první. Otevřeme terminál a hurá na to. Vytvoříme si složku dostupnou z našeho webového serveru, inicializuje Git, Composer a přidáme závislost na vybranou knihovnu podle poslední dostupné verze na Githubu:
@@ -72,9 +71,14 @@ Dále si vytvořím soubor index.php, kde budu psát logiku aplikace. Rovnou si 
 composer require tracy/tracy:'2.2.*'
 ```
 
-Podle návodu na GitHubu si zkusíme zavolat koncový bod venues/explore (venues/search není ještě v knihovně implementován). Je potřeba trošku upravit soubor composer.json, aby se nám stáhnul také certifikát, který potřeba pro komunikaci přes _curl_.
+Podle návodu na GitHubu si zkusíme zavolat koncový bod venues/explore (venues/search není ještě v knihovně implementován). Je potřeba trošku upravit soubor composer.json, aby se nám stáhnul také certifikát, který potřeba pro komunikaci přes _curl_, viz composer.json.
 
 Získané místa dostaneme už přímo jako pole objektů stdClass, nemusíme tak parsovat JSON.
 
-## Dobré vědět
+## Ukládání dat
+
+... dibi/dibi
+
+## Poznámky pod čarou
+
 ID místa se může měnit, ale staré ID vždy přesměruje na nové.
