@@ -30,6 +30,7 @@ $venues = $gateway->search(array(
     // 'intent' => 'global',
     // 'query' => 'sushi'
 ));
+// \Tracy\Debugger::dump($venues);
 
 // connect to database
 $options = array(

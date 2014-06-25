@@ -73,7 +73,11 @@ composer require tracy/tracy:'2.2.*'
 
 Podle návodu na GitHubu si zkusíme zavolat koncový bod venues/explore (venues/search není ještě v knihovně implementován). Je potřeba trošku upravit soubor composer.json, aby se nám stáhnul také certifikát, který potřeba pro komunikaci přes _curl_, viz composer.json.
 
-Získané místa dostaneme už přímo jako pole objektů stdClass, nemusíme tak parsovat JSON.
+Získané místa dostaneme už přímo jako pole objektů stdClass, nemusíme tak parsovat JSON. Data si můžeme vypsat příkazem:
+
+```
+\Tracy\Debugger::dump($venues);
+```
 
 ## Ukládání dat
 
@@ -83,11 +87,18 @@ Pro ukládání dat do databáze použijeme nějakou jednoduchou knihovnu, třeb
 composer require dibi/dibi:'2.2.*'
 ```
 
-Vytvoříme si databázi a nastavíme přístupy v souboru index.php do pole $options. Protože data o místech nám z API přicházejí jako vícerozměrný objekt, ale databáze je pouze jednorozměrná (nemůže mít sloupce zanořené do jiného sloupce), musíme si data převést.
-Toto provedeme pomocí několika funkcí, které jsem umístil do souboru libs/functions.inc.php. Rovněž si specifikujeme pole $allowFields, kterým definujeme, které sloupce jsme v databázi vytvořili a lze tedy do nich ukládat.
+Vytvoříme si databázi a nastavíme přístupy v souboru index.php do pole $options. Skript pro vytvoření databáze jsem umístil do složky sql.
 
+Protože data o místech nám z API přicházejí jako vícerozměrný objekt, ale databáze je pouze jednorozměrná (nemůže mít sloupce zanořené do jiného sloupce), musíme si data převést.
+Toto provedeme pomocí několika funkcí, které jsem umístil do souboru libs/functions.inc.php. Pokud máme nějaký parametr 'phone', který je zanořený do parametru 'contact', výsledný parametr bude 'contact_phone'.
 
+Rovněž si specifikujeme pole $allowFields, kterým definujeme, které sloupce jsme v databázi vytvořili a lze tedy do nich ukládat.
+
+Teď už jenom projdeme všechny získané místa pomocí cyklu foreach a postupně každé místo převedeme na pole $data, které uložíme do databáze.
+Pamatujme, že dle pravidel Foursquare bychom neměli ukládat data více jak 30 dní.
 
 ## Poznámky pod čarou
 
-ID místa se může měnit, ale staré ID vždy přesměruje na nové.
+1. ID místa se může měnit, ale staré ID vždy přesměruje na nové.
+
+2. Cílem Foursquare je, abychom neukládali data získaná přes jejich API, ale používali jejich platformu, jako trvalý a opakovaný zdroj míst.
