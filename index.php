@@ -1,11 +1,15 @@
 <?php
 
+// force using of UTF-8
+header('Content-type: text/html; charset=utf-8');
+
+// load all libraries installed from composer
 require 'vendor/autoload.php';
 
 // enable debugger
 Tracy\Debugger::enable();
 
-// nastavíme knihovnu pro stahování dat
+// set library for downloading data
 $client = new \TheTwelve\Foursquare\HttpClient\CurlHttpClient('vendor/haxx-se/curl/cacert.pem');
 $factory = new \TheTwelve\Foursquare\ApiGatewayFactory($client);
 $factory->setClientCredentials(
@@ -13,14 +17,21 @@ $factory->setClientCredentials(
     'CLIENT_SECRET'
 );
 
-// koncový bod pro venues/*
+// end-point for venues/*
 $gateway = $factory->getVenuesGateway();
 
-// získání dat z venues/explore
+// TODO
+// doplnit explore, nebo search, podle toho co není hotové
+// dibi pro ukládání dat
+
+// gets data from venues/explore
 $venues = $gateway->search(array(
     'll' => '50.071726,14.402497',
     'radius' => 250,
-    'limit' => 5
+    'limit' => 1
 ));
 
-Tracy\Debugger::dump($venues);
+// print venues
+foreach ($venues as $venue) {
+    \Tracy\Debugger::dump($venue);
+}
