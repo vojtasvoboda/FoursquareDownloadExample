@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1a9731c586fd0e532e34d4038786a976",
+    "hash": "8e35db39ca6740709a508a8c38d969c6",
     "packages": [
         {
             "name": "dibi/dibi",
@@ -69,15 +69,55 @@
             "time": "2014-06-11 14:16:32"
         },
         {
-            "name": "haxx-se/curl",
-            "version": "1.0.0",
-            "dist": {
-                "type": "file",
-                "url": "http://curl.haxx.se/ca/cacert.pem",
-                "reference": null,
-                "shasum": null
+            "name": "kdyby/curl-ca-bundle",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kdyby/CurlCaBundle.git",
+                "reference": "40a2b20cbe9b07eef81bf025f42ea205afd9a0a5"
             },
-            "type": "library"
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kdyby/CurlCaBundle/zipball/40a2b20cbe9b07eef81bf025f42ea205afd9a0a5",
+                "reference": "40a2b20cbe9b07eef81bf025f42ea205afd9a0a5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "~0.6"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Filip Procházka",
+                    "email": "filip@prochazka.su",
+                    "homepage": "http://filip-prochazka.com"
+                }
+            ],
+            "description": "This package provides root certificates for usage in api clients on systems that have missing or outdated certificates.",
+            "homepage": "http://kdyby.org",
+            "keywords": [
+                "bundle",
+                "ca",
+                "certificate",
+                "curl",
+                "https",
+                "ssl"
+            ],
+            "time": "2014-06-16 21:59:46"
         },
         {
             "name": "thetwelvelabs/foursquare",

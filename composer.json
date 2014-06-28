@@ -9,20 +9,7 @@
     "require": {
         "thetwelvelabs/foursquare": "0.2.*",
         "tracy/tracy": "2.2.*",
-        "haxx-se/curl": "1.0.0",
+        "kdyby/curl-ca-bundle": "~1.0.3",
         "dibi/dibi": "2.2.*"
-    },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "haxx-se/curl",
-                "version": "1.0.0",
-                "dist": {
-                    "url": "http://curl.haxx.se/ca/cacert.pem",
-                    "type": "file"
-                }
-            }
-        }
-    ]
+    }
 }

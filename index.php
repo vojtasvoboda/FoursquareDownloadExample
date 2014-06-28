@@ -11,7 +11,7 @@ require 'libs/functions.inc.php';
 Tracy\Debugger::enable();
 
 // set library for downloading data
-$client = new \TheTwelve\Foursquare\HttpClient\CurlHttpClient('vendor/haxx-se/curl/cacert.pem');
+$client = new \TheTwelve\Foursquare\HttpClient\CurlHttpClient(\Kdyby\CurlCaBundle\CertificateHelper::getCaInfoFile());
 $factory = new \TheTwelve\Foursquare\ApiGatewayFactory($client);
 $factory->setClientCredentials(
     'CLIENT_ID',
